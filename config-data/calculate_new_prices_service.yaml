@@ -1,4 +1,4 @@
-server: 
+server:
   port: ${PORT:${SERVER_PORT:0}}
 eureka:
   client:

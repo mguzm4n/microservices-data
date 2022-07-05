@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8781/eureka
+  instance:
+    hostname: localhost
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: product_service
+          uri: lb://product_service
+          predicates:
+            - Path=/product/**
+        - id: calculate_new_prices_service
+          uri: lb://calculate_new_prices_service
+          predicates:
+            - Path=/new_product_prices/**
